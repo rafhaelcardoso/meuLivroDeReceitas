@@ -1,3 +1,6 @@
+using MeuLivroDeReceitas.Infrastructure.Migrations;
+using MeuLivroDeReceitas.Domain.Extension;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,4 +25,14 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+AtualizarDb();
+
 app.Run();
+
+
+void AtualizarDb()
+{
+    var con = builder.Configuration.GetConexao();
+    var db = builder.Configuration.GetDatabase();
+    Database.CriarDb(con, db);
+}
